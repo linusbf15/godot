@@ -403,7 +403,7 @@ if env["platform"] in compatibility_platform_aliases:
     alias = env["platform"]
     platform = compatibility_platform_aliases[alias]
     print_warning(
-        f'Platform "{alias}" has been renamed to "{platform}" in Godot 4. Building for platform "{platform}".'
+        f'Platform "{alias}" has been renamed to "{platform}" in Linus Engine 4. Building for platform "{platform}".'
     )
     env["platform"] = platform
 
