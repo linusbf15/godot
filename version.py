@@ -1,9 +1,9 @@
-short_name = "godot"
-name = "Godot Engine"
-major = 4
-minor = 8
+short_name = "l-engine"
+name = "Linus Engine"
+major = 1
+minor = 0
 patch = 0
 status = "dev"
 module_config = ""
-website = "https://godotengine.org"
+website = "https://linusbf15.github.io/Linus-Engine"
 docs = "latest"
