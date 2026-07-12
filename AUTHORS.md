@@ -15,21 +15,36 @@ wrote which part of the codebase.
 
 GitHub usernames are indicated in parentheses, or as sole entry when no other
 name is available.
+## Linus Engine Project Founders
 
-## Project Founders
+    Linus Fogsgaard (linusbf15)
+
+## Linus Engine Lead Developer
+
+    Linus Fogsgaard (linusbf15)
+
+## Linus Engine Project Manager
+
+    Linus Fogsgaard (linusbf15)
+
+## Linus Engine Developers
+
+    Linus Fogsgaard (linusbf15)
+
+## Godot Engine Project Founders
 
     Juan Linietsky (reduz)
     Ariel Manzur (punto-)
 
-## Lead Developer
+## Godot Engine Lead Developer
 
     Juan Linietsky (reduz)
 
-## Project Manager
+## Godot Engine Project Manager
 
     Rémi Verschelde (akien-mga)
 
-## Developers
+## Godot Engine Developers
 
     Aaron Franke (aaronfranke)
     Aaron Pagano (aaronp64)
@@ -216,7 +231,6 @@ name is available.
     Lars Pettersson (larspet)
     lawnjelly
     Leon Krause (leonkrause)
-    Linus Fogsgaard (linusbf15)
     Liz Haas (27thLiz)
     Logan Detrick (lodetrick)
     Logan Lang (devloglogan)
