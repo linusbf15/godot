@@ -1,9 +1,9 @@
 # Contributors guidelines
 
 This document summarizes the most important points for people interested in
-contributing to Godot, especially via bug reports or pull requests.
+contributing to Linus Engine, especially via bug reports or pull requests.
 
-Godot has a dedicated [Contributing documentation](https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html)
+Linus Engine has a dedicated [Contributing documentation](https://contributing.godotengine.org/en/latest/organization/how_to_contribute.html)
 which details these points and more, and is a recommended read.
 
 <!--
@@ -18,7 +18,7 @@ which details these points and more, and is a recommended read.
 - [Reporting bugs](#reporting-bugs)
 - [Proposing features or improvements](#proposing-features-or-improvements)
 - [Contributing pull requests](#contributing-pull-requests)
-- [Contributing to Godot translations](#contributing-to-godot-translations)
+- [Contributing to Linus Engine translations](#contributing-to-l-engine-translations)
 - [Communicating with developers](#communicating-with-developers)
 
 ## Reporting bugs
@@ -27,16 +27,15 @@ Report bugs [here](https://github.com/godotengine/godot/issues/new?assignees=&la
 Please follow the instructions in the template when you do.
 
 Notably, please include a Minimal Reproduction Project (MRP), which is a small
-Godot project which reproduces the issue, with no unnecessary files included.
+Linus Engine project which reproduces the issue, with no unnecessary files included.
 Be sure to not include the `.godot` folder in the archive to save space.
 
-Make sure that the bug you are experiencing is reproducible in the latest Godot
-releases. You can find an overview of all Godot releases [on the website](https://godotengine.org/download/archive/)
+Make sure that the bug you are experiencing is reproducible in the latest Linus Engine
+releases. You can find an overview of all Linus Engine releases [on the website](https://linusbf15/Linus-Engine/archive.html)
 to confirm whether your current version is the latest one. It's worth testing
-against both the latest stable release and the latest dev snapshot for the next
-Godot release.
+against both the latest stable release and the latest dev snapshot for the next release.
 
-If you run into a bug which wasn't present in an earlier Godot version (what we
+If you run into a bug which wasn't present in an earlier Linus Engine version (what we
 call a _regression_), please mention it and clarify which versions you tested
 (both the one(s) working and the one(s) exhibiting the bug).
 
@@ -44,7 +43,7 @@ call a _regression_), please mention it and clarify which versions you tested
 
 **The main issue tracker is for bug reports and does not accept feature proposals.**
 
-Instead, head to the [Godot Proposals repository](https://github.com/godotengine/godot-proposals)
+Instead, head to the [Linus Engine Proposals repository](https://github.com/linusbf15/l-engine-proposals)
 and follow the instructions in the README file and issue template.
 
 ## Contributing pull requests
