@@ -1,0 +1,2 @@
+cd /c/Users/User/Documents/GitHub/godot
+scons platform=windows target=editor winrt=no accesskit=no d3d12=no angle=no -j7

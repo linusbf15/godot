@@ -60,7 +60,7 @@ def validate_arch(arch, platform_name, supported_arches):
 def get_build_version(short):
     import version
 
-    name = "custom_build"
+    name = "stable"
     if os.getenv("BUILD_NAME") is not None:
         name = os.getenv("BUILD_NAME")
     v = "%d.%d" % (version.major, version.minor)
