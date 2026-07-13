@@ -39,6 +39,11 @@
 #include "core/version.h"
 #include "servers/rendering/rendering_device.h"
 
+const char *const AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+const char *const AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard", nullptr };
+const char *const AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+const char *const AUTHORS_FOUNDERS[] = { "Linus Fogsgaard", nullptr };
+
 void Engine::_update_time_scale() {
 	_time_scale = _user_time_scale * _game_time_scale;
 	user_ips = MAX(1, ips * _user_time_scale);
