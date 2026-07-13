@@ -47,6 +47,13 @@
 #include "scene/main/scene_tree.h"
 #include "scene/main/window.h"
 
+#ifndef AUTHORS_FOUNDERS
+const char *AUTHORS_FOUNDERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+#endif
+
 Label *CreditsRoll::_create_label(const String &p_with_text, LabelSize p_size) {
 	Label *label = memnew(Label);
 	label->set_horizontal_alignment(HORIZONTAL_ALIGNMENT_CENTER);

@@ -53,6 +53,13 @@
 #include "scene/main/scene_tree.h"
 #include "scene/resources/style_box.h"
 
+#ifndef AUTHORS_FOUNDERS
+const char *AUTHORS_FOUNDERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+const char *AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+#endif
+
 void EditorAbout::_notification(int p_what) {
 	switch (p_what) {
 		case NOTIFICATION_TRANSLATION_CHANGED: {

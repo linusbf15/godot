@@ -1,5 +1,5 @@
 def can_build(env, platform):
-    env.module_add_dependencies("gdscript", ["jsonrpc", "websocket"], True)
+    env.module_add_dependencies("lescript", ["jsonrpc", "websocket"], True)
     return True
 
 
@@ -9,12 +9,12 @@ def configure(env):
 
 def get_doc_classes():
     return [
-        "@GDScript",
-        "GDScript",
-        "GDScriptLanguageProtocol",
-        "GDScriptSyntaxHighlighter",
-        "GDScriptTextDocument",
-        "GDScriptWorkspace",
+        "@LEScript",
+        "LEScript",
+        "LEScriptLanguageProtocol",
+        "LEScriptSyntaxHighlighter",
+        "LEScriptTextDocument",
+        "LEScriptWorkspace",
     ]
 
 
