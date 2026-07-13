@@ -54,10 +54,10 @@
 #include "scene/resources/style_box.h"
 
 #ifndef AUTHORS_FOUNDERS
-const char *AUTHORS_FOUNDERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+inline const char *const AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_FOUNDERS[] = { "Linus Fogsgaard", nullptr };
 #endif
 
 void EditorAbout::_notification(int p_what) {

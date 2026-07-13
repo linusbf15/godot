@@ -48,10 +48,10 @@
 #include "scene/main/window.h"
 
 #ifndef AUTHORS_FOUNDERS
-const char *AUTHORS_FOUNDERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
-const char *AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard (linusbf15)", nullptr };
+inline const char *const AUTHORS_LEAD_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_PROJECT_MANAGERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_DEVELOPERS[] = { "Linus Fogsgaard", nullptr };
+inline const char *const AUTHORS_FOUNDERS[] = { "Linus Fogsgaard", nullptr };
 #endif
 
 Label *CreditsRoll::_create_label(const String &p_with_text, LabelSize p_size) {

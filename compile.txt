@@ -1,2 +1,10 @@
 cd /c/Users/User/Documents/GitHub/godot
-scons platform=windows dev_build=yes d3d12=yes angle=yes production=no accesskit=yes winrt=yes target=editor
+
+Production:
+scons platform=windows dev_build=no d3d12=yes angle=yes production=yes accesskit=yes winrt=yes target=editor lto=full
+Fast Debug:
+scons platform=windows dev_build=no d3d12=no angle=no accesskit=no winrt=no target=editor lto=none -j8
+Debug:
+scons platform=windows dev_build=no d3d12=yes angle=yes production=yes accesskit=yes winrt=yes target=editor lto=none -j8
+Full Debug:
+scons platform=windows dev_build=yes d3d12=yes angle=yes production=no accesskit=yes winrt=yes target=editor lto=none
