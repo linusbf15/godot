@@ -471,7 +471,7 @@ String GDScriptLanguage::debug_parse_stack_level_expression(int p_level, const S
 }
 
 void GDScriptLanguage::get_recognized_extensions(List<String> *p_extensions) const {
-	p_extensions->push_back("gd");
+	p_extensions->push_back("lescript");
 }
 
 void GDScriptLanguage::get_public_functions(List<MethodInfo> *p_functions) const {

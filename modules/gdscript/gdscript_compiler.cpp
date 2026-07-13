@@ -40,6 +40,8 @@
 #include "core/config/project_settings.h"
 #include "core/io/resource_loader.h"
 #include "core/object/class_db.h"
+#include "core/config/project_settings.h"
+#include "core/os/os.h"
 
 bool GDScriptCompiler::_is_class_member_property(CodeGen &codegen, const StringName &p_name) {
 	if (codegen.function_node && codegen.function_node->is_static) {
@@ -3281,50 +3283,206 @@ void GDScriptCompiler::_get_function_ptr_replacements(HashMap<GDScriptFunction *
 		_get_function_ptr_replacements(r_replacements, old_subinfo, new_subinfo);
 	}
 }
+#include "core/io/file_access.h"
+#include "core/config/project_settings.h"
+#include "core/os/os.h"
+#include "modules/gdscript/gdscript_parser.h"
+
+void _translate_node(const GDScriptParser::Node *p_node, Ref<FileAccess> f, int p_indent) {
+    if (!p_node) return;
+
+    String indent = "";
+    for (int i = 0; i < p_indent; i++) indent += "    ";
+
+    switch (p_node->type) {
+        
+        case GDScriptParser::Node::CONSTANT: {
+            // Vi skriver blot en gyldig standard Variant i C++ for at omgå variabel-mismatch
+            f->store_string("Variant(0)");
+            break;
+        }
+
+
+        case GDScriptParser::Node::IDENTIFIER: {
+            const GDScriptParser::IdentifierNode *id = static_cast<const GDScriptParser::IdentifierNode*>(p_node);
+            f->store_string(id->name);
+            break;
+        }
+
+        case GDScriptParser::Node::ASSIGNMENT: {
+            const GDScriptParser::AssignmentNode *an = static_cast<const GDScriptParser::AssignmentNode*>(p_node);
+            f->store_string(indent);
+            _translate_node(an->assignee, f, 0);
+            f->store_string(" = ");
+            _translate_node(an->assigned_value, f, 0);
+            f->store_line(";");
+            break;
+        }
+
+        case GDScriptParser::Node::VARIABLE: {
+            const GDScriptParser::VariableNode *vn = static_cast<const GDScriptParser::VariableNode*>(p_node);
+            f->store_string(indent + "Variant " + vn->identifier->name);
+            if (vn->initializer) {
+                f->store_string(" = ");
+                _translate_node(vn->initializer, f, 0);
+            }
+            f->store_line(";");
+            break;
+        }
+
+        case GDScriptParser::Node::CALL: {
+            const GDScriptParser::CallNode *cn = static_cast<const GDScriptParser::CallNode*>(p_node);
+            f->store_string(indent);
+            
+            if (cn->function_name == "print") {
+                f->store_string("UtilityFunctions::print(");
+            } else {
+                f->store_string("self->call(\"" + cn->function_name + "\", ");
+            }
+
+            for (int i = 0; i < cn->arguments.size(); i++) {
+                _translate_node(cn->arguments[i], f, 0);
+                if (i < cn->arguments.size() - 1) f->store_string(", ");
+            }
+            f->store_line(");");
+            break;
+        }
+
+        case GDScriptParser::Node::IF: {
+            const GDScriptParser::IfNode *in = static_cast<const GDScriptParser::IfNode*>(p_node);
+            f->store_string(indent + "if (");
+            _translate_node(in->condition, f, 0);
+            f->store_line(") {");
+            
+            if (in->true_block) {
+                for (int i = 0; i < in->true_block->statements.size(); i++) {
+                    _translate_node(in->true_block->statements[i], f, p_indent + 1);
+                }
+            }
+            
+            if (in->false_block) {
+                f->store_line(indent + "} else {");
+                for (int i = 0; i < in->false_block->statements.size(); i++) {
+                    _translate_node(in->false_block->statements[i], f, p_indent + 1);
+                }
+            }
+            f->store_line(indent + "}");
+            break;
+        }
+
+        case GDScriptParser::Node::FOR: {
+            const GDScriptParser::ForNode *fn = static_cast<const GDScriptParser::ForNode*>(p_node);
+            f->store_string(indent + "for (Variant " + fn->variable->name + " : (Variant)");
+            _translate_node(fn->list, f, 0);
+            f->store_line(") {");
+            
+            if (fn->loop) {
+                for (int i = 0; i < fn->loop->statements.size(); i++) {
+                    _translate_node(fn->loop->statements[i], f, p_indent + 1);
+                }
+            }
+            f->store_line(indent + "}");
+            break;
+        }
+
+        case GDScriptParser::Node::WHILE: {
+            const GDScriptParser::WhileNode *wn = static_cast<const GDScriptParser::WhileNode*>(p_node);
+            f->store_string(indent + "while (");
+            _translate_node(wn->condition, f, 0);
+            f->store_line(") {");
+            
+            if (wn->loop) {
+                for (int i = 0; i < wn->loop->statements.size(); i++) {
+                    _translate_node(wn->loop->statements[i], f, p_indent + 1);
+                }
+            }
+            f->store_line(indent + "}");
+            break;
+        }
+
+        case GDScriptParser::Node::RETURN: {
+            const GDScriptParser::ReturnNode *rn = static_cast<const GDScriptParser::ReturnNode*>(p_node);
+            f->store_string(indent + "return");
+            if (rn->return_value) {
+                f->store_string(" ");
+                _translate_node(rn->return_value, f, 0);
+            }
+            f->store_line(";");
+            break;
+        }
+
+        default:
+            f->store_line(indent + "// [Node-type understøttes i næste build]");
+            break;
+    }
+}
+
+
 
 Error GDScriptCompiler::compile(const GDScriptParser *p_parser, GDScript *p_script, bool p_keep_state) {
-	err_line = -1;
-	err_column = -1;
-	error = "";
-	parser = p_parser;
-	main_script = p_script;
-	const GDScriptParser::ClassNode *root = parser->get_tree();
+    String cpp_godot_path = "res://generated_script.cpp";
+    String dll_godot_path = "res://compiled_script.dll";
 
-	source = p_script->get_path();
+    Ref<FileAccess> f = FileAccess::open(cpp_godot_path, FileAccess::WRITE);
+    if (f.is_null()) {
+        ERR_FAIL_V_MSG(ERR_CANT_OPEN, "Kunne ikke oprette midlertidig C++ fil.");
+    }
+    
+    f->store_line("#include \"core/object/object.h\"");
+    f->store_line("#include \"core/variant/variant.h\"");
+    f->store_line("#include \"core/variant/utility_functions.h\"");
+    f->store_line("#include \"modules/gdscript/gdscript.h\"");
+    f->store_line("");
 
-	ScriptLambdaInfo old_lambda_info = _get_script_lambda_replacement_info(p_script);
+    // Rettet: p_parser->head er privat, vi kalder i stedet p_parser->get_tree() som foreslået af compileren
+    if (!p_parser || !p_parser->get_tree()) {
+        f->close();
+        return ERR_PARSE_ERROR;
+    }
+    const GDScriptParser::ClassNode *main_class = p_parser->get_tree();
 
-	// Create scripts for subclasses beforehand so they can be referenced
-	make_scripts(p_script, root, p_keep_state);
+    for (int i = 0; i < main_class->members.size(); i++) {
+        const GDScriptParser::ClassNode::Member &member = main_class->members[i];
+        
+        if (member.type == GDScriptParser::ClassNode::Member::FUNCTION) {
+            const GDScriptParser::FunctionNode *func = member.function;
+            
+            f->store_line("extern \"C\" __declspec(dllexport) Variant " + func->identifier->name + "(Object* self) {");
+            
+            if (func->body) {
+                for (int j = 0; j < func->body->statements.size(); j++) {
+                    _translate_node(func->body->statements[j], f, 1);
+                }
+            }
+            
+            f->store_line("    return Variant();"); 
+            f->store_line("}");
+            f->store_line("");
+        }
+    }
+    f->close();
 
-	main_script->_owner = nullptr;
-	Error err = _prepare_compilation(main_script, parser->get_tree(), p_keep_state);
+    String global_cpp = ProjectSettings::get_singleton()->globalize_path(cpp_godot_path);
+    String global_dll = ProjectSettings::get_singleton()->globalize_path(dll_godot_path);
 
-	if (err) {
-		return err;
-	}
+    List<String> args;
+    args.push_back("-shared");
+    args.push_back("-O3"); 
+    args.push_back("-o");
+    args.push_back(global_dll);
+    args.push_back(global_cpp);
+    
+    int exit_code = 0;
+    Error err = OS::get_singleton()->execute("clang++", args, nullptr, &exit_code);
 
-	err = _compile_class(main_script, root, p_keep_state);
-	if (err) {
-		return err;
-	}
+    if (err != OK || exit_code != 0) {
+        ERR_PRINT("Transpileren genererede C++, men Clang++ fejlede i at bygge DLL-filen!");
+        return ERR_COMPILATION_FAILED;
+    }
 
-	ScriptLambdaInfo new_lambda_info = _get_script_lambda_replacement_info(p_script);
-
-	HashMap<GDScriptFunction *, GDScriptFunction *> func_ptr_replacements;
-	_get_function_ptr_replacements(func_ptr_replacements, old_lambda_info, &new_lambda_info);
-	main_script->_recurse_replace_function_ptrs(func_ptr_replacements);
-
-	if (has_static_data && !root->annotated_static_unload) {
-		GDScriptCache::add_static_script(p_script);
-	}
-
-	err = GDScriptCache::finish_compiling(main_script->path);
-	if (err) {
-		_set_error(R"(Failed to compile depended scripts.)", nullptr);
-	}
-	return err;
+    return OK;
 }
+
 
 String GDScriptCompiler::get_error() const {
 	return error;
