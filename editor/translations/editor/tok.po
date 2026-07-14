@@ -1855,8 +1855,8 @@ msgstr ""
 "lawa len tawa jo ala e (poki) lipu\n"
 "(comma-separated, e.g: *.tscn, *.tres, scenes/*)"
 
-msgid "GDScript Export Mode:"
-msgstr "nasin pana pi toki GDScript:"
+msgid "LEScript Export Mode:"
+msgstr "nasin pana pi toki LEScript:"
 
 msgid "Text (easier debugging)"
 msgstr "nimi (sina pipi ala kepeken lili)"

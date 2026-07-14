@@ -2015,8 +2015,8 @@ msgstr "Tee Pööramine"
 msgid "Path Local"
 msgstr "Lokaalne Tee"
 
-msgid "GDScript"
-msgstr "GDScript"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Max Call Stack"
 msgstr "Maksimaalne Kutsepinu"

@@ -3120,8 +3120,8 @@ msgstr "埋め込み画像の処理"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
-msgstr "GDScript"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Max Call Stack"
 msgstr "最大コールスタック数"

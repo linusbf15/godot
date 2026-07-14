@@ -3962,7 +3962,7 @@ msgstr "Versionsnamngivning"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
+msgid "LEScript"
 msgstr "GDSkript"
 
 msgid "Max Call Stack"

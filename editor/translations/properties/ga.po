@@ -3929,8 +3929,8 @@ msgstr "Leagan Ainmniúcháin"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
-msgstr "GDScriptName"
+msgid "LEScript"
+msgstr "LEScriptName"
 
 msgid "Max Call Stack"
 msgstr "Uasmhéid Carn Glaonna"

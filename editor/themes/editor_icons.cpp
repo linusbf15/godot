@@ -123,7 +123,7 @@ void editor_register_icons(const Ref<Theme> &p_theme, bool p_dark_theme, float p
 	const Color accent_color = p_theme->get_color(SNAME("accent_color"), EditorStringName(Editor));
 	accent_color_map[Color::html("699ce8")] = accent_color;
 	if (accent_color.get_luminance() > 0.75) {
-		accent_color_map[Color::html("ffffff")] = Color(0.2, 0.2, 0.2);
+		accent_color_map[Color::html("ffffff")] = Color(0.2, 0.3, 0.2);
 	}
 
 	accent_color_icons.insert("GuiChecked");

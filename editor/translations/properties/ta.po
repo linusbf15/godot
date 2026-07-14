@@ -3804,8 +3804,8 @@ msgstr "பெயரிடும் பதிப்பு"
 msgid "FBX2glTF"
 msgstr "FBX2GLTF"
 
-msgid "GDScript"
-msgstr "GDSCRIPT"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Max Call Stack"
 msgstr "அதிகபட்ச அழைப்பு அடுக்கு"

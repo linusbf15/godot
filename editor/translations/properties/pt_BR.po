@@ -3974,8 +3974,8 @@ msgstr "Versão de Nomeação"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
-msgstr "GDScript"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Max Call Stack"
 msgstr "Máx. Call Stack"

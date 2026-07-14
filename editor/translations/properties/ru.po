@@ -4028,8 +4028,8 @@ msgstr "Версия для именования"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
-msgstr "GDScript"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Max Call Stack"
 msgstr "Макс. размер стека вызовов"

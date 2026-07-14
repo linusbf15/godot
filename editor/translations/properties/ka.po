@@ -2490,8 +2490,8 @@ msgstr "დასახელების ვერსია"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
-msgstr "GDScript"
+msgid "LEScript"
+msgstr "LEScript"
 
 msgid "Copyright"
 msgstr "საავტორო უფლებები"

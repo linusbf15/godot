@@ -1994,7 +1994,7 @@ msgstr "مسیر گره"
 msgid "Importer"
 msgstr "درون‌بردگر"
 
-msgid "GDScript"
+msgid "LEScript"
 msgstr "جی‌دی اسکریپت"
 
 msgid "Bake FPS"

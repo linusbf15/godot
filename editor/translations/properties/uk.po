@@ -3969,7 +3969,7 @@ msgstr "Версія найменування"
 msgid "FBX2glTF"
 msgstr "FBX2glTF"
 
-msgid "GDScript"
+msgid "LEScript"
 msgstr "Скрипт"
 
 msgid "Max Call Stack"

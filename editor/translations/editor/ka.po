@@ -2439,8 +2439,8 @@ msgstr "თვისებები"
 msgid "Encryption"
 msgstr "დაშიფვრა"
 
-msgid "GDScript Export Mode:"
-msgstr "GDScript-ის გატანის რეჟიმი:"
+msgid "LEScript Export Mode:"
+msgstr "LEScript-ის გატანის რეჟიმი:"
 
 msgid "Export PCK/ZIP..."
 msgstr "PCK/ZIP-ის გატანა..."
@@ -4988,8 +4988,8 @@ msgstr "გაყოფა"
 msgid "Unified"
 msgstr "გაერთიანებული"
 
-msgid "Cannot instantiate GDScript class."
-msgstr "GDScript-ს კლასის ინსტანცირება შეუძლებელია."
+msgid "Cannot instantiate LEScript class."
+msgstr "LEScript-ს კლასის ინსტანცირება შეუძლებელია."
 
 msgid "Export Settings"
 msgstr "პარამეტრების გატანა"
